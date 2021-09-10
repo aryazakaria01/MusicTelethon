@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project )
+# AlvinMusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -16,11 +16,11 @@
 
 from pyrogram import Client
 import asyncio
-from AlvinMusicRobot.config import SUDO_USERS
-from AlvinMusicRobot.config import PMPERMIT
+from AlvinMusic.config import SUDO_USERS
+from AlvinMusic.config import PMPERMIT
 from pyrogram import filters
 from pyrogram.types import Message
-from AlvinMusicRobot.services.callsmusic import client as USER
+from AlvinMusic.services.callsmusic import client as USER
 
 PMSET =True
 pchats = []
@@ -69,7 +69,7 @@ async def pmPermiat(client: USER, message: Message):
     chat_id = message.chat.id
     if not chat_id in pchats:
         pchats.append(chat_id)
-        await message.reply_text("disetujui untuk PM")
+        await message.reply_text("Disetujui untuk PM")
         return
     message.continue_propagation()    
     
@@ -79,6 +79,6 @@ async def rmpmPermiat(client: USER, message: Message):
     chat_id = message.chat.id
     if chat_id in pchats:
         pchats.remove(chat_id)
-        await message.reply_text("tidak disetujui untuk PM")
+        await message.reply_text("Tidak disetujui untuk PM")
         return
     message.continue_propagation()
