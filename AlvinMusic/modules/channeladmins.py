@@ -20,15 +20,15 @@ from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import Message
 
-from AlvinMusicRobot.config import que
-from AlvinMusicRobot.function.admins import set
-from AlvinMusicRobot.helpers.channelmusic import get_chat_id
-from AlvinMusicRobot.helpers.decorators import authorized_users_only
-from AlvinMusicRobot.helpers.decorators import errors
-from AlvinMusicRobot.helpers.filters import command 
-from AlvinMusicRobot.helpers.filters import other_filters
-from AlvinMusicRobot.services.callsmusic import callsmusic
-from AlvinMusicRobot.services.queues import queues
+from AlvinMusic.config import que
+from AlvinMusic.function.admins import set
+from AlvinMusic.helpers.channelmusic import get_chat_id
+from AlvinMusic.helpers.decorators import authorized_users_only
+from AlvinMusic.helpers.decorators import errors
+from AlvinMusic.helpers.filters import command 
+from AlvinMusic.helpers.filters import other_filters
+from AlvinMusic.services.callsmusic import callsmusic
+from AlvinMusic.services.queues import queues
 
 
 @Client.on_message(filters.command(["channelpause","cpause"]) & filters.group & ~filters.edited)
@@ -40,13 +40,13 @@ async def pause(_, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("apakah obrolan tertautkan")
+      await message.reply("Apakah obrolan tertautkan")
       return    
     chat_id = chid
     if (chat_id not in callsmusic.active_chats) or (
         callsmusic.active_chats[chat_id] == "paused"
     ):
-        await message.reply_text("❗ tidak ada yang diputar!")
+        await message.reply_text("❗ Tidak ada yang diputar!")
     else:
         callsmusic.pause(chat_id)
         await message.reply_text("▶️ Paused!")
@@ -61,13 +61,13 @@ async def resume(_, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("apakah obrolan tertautkan")
+      await message.reply("Apakah obrolan tertautkan")
       return    
     chat_id = chid
     if (chat_id not in callsmusic.active_chats) or (
         callsmusic.active_chats[chat_id] == "playing"
     ):
-        await message.reply_text("❗ tidak ada yang dijeda!")
+        await message.reply_text("❗ Tidak ada yang dijeda!")
     else:
         callsmusic.resume(chat_id)
         await message.reply_text("⏸ Resumed!")
@@ -82,11 +82,11 @@ async def stop(_, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("apakah obrolan tertautkan")
+      await message.reply("Apakah obrolan tertautkan")
       return    
     chat_id = chid
     if chat_id not in callsmusic.active_chats:
-        await message.reply_text("❗ tidak ada yang berputar!")
+        await message.reply_text("❗ Tidak ada yang berputar!")
     else:
         try:
             queues.clear(chat_id)
@@ -94,7 +94,7 @@ async def stop(_, message: Message):
             pass
 
         await callsmusic.stop(chat_id)
-        await message.reply_text("❌ berhenti memutar!")
+        await message.reply_text("❌ Berhenti memutar!")
 
 
 @Client.on_message(filters.command(["channelskip","cskip"]) & filters.group & ~filters.edited)
@@ -107,11 +107,11 @@ async def skip(_, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("apakah obrolan tertautkan")
+      await message.reply("Apakah obrolan tertautkan")
       return    
     chat_id = chid
     if chat_id not in callsmusic.active_chats:
-        await message.reply_text("❗ tidak ada yang diputar untuk di skip!")
+        await message.reply_text("❗ Tidak ada yang diputar untuk di skip!")
     else:
         queues.task_done(chat_id)
 
@@ -139,7 +139,7 @@ async def admincache(client, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("apakah obrolan tertautkan")
+      await message.reply("Apakah obrolan tertautkan")
       return
     set(
         chid,
