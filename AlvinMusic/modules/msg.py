@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project )
+# AlvinMusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -15,13 +15,13 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-from AlvinMusicRobot.config import SOURCE_CODE
-from AlvinMusicRobot.config import ASSISTANT_NAME
-from AlvinMusicRobot.config import PROJECT_NAME
-from AlvinMusicRobot.config import SUPPORT_GROUP
-from AlvinMusicRobot.config import UPDATES_CHANNEL
+from AlvinMusic.config import SOURCE_CODE
+from AlvinMusic.config import ASSISTANT_NAME
+from AlvinMusic.config import PROJECT_NAME
+from AlvinMusic.config import SUPPORT_GROUP
+from AlvinMusic.config import UPDATES_CHANNEL
 class Messages():
-      START_MSG = "**🎶Halo🎶 [{}](tg://user?id={})!**\n\n Saya Adalah Bot Canggih Yang Dibuat Untuk Memutar Musik Di Voice Chat Grup & Channel.\n\n kirim /help Untuk Info Lebih Lanjut.\n\n jika ada yang ingin ditanyakan bisa PM @alvin_junior tapi mohon untuk tidak melakukan spam."
+      START_MSG = "**🎶 Halo 🎶 [{}](tg://user?id={})!**\n\n Saya Adalah Bot Canggih Yang Dibuat Untuk Memutar Musik Di Voice Chat Grup & Channel.\n\n kirim /help Untuk Info Lebih Lanjut.\n\n jika ada yang ingin ditanyakan bisa PM @alvin_junior tapi mohon untuk tidak melakukan spam."
       HELP_MSG = [
         ".",
 f"""
