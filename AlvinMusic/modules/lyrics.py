@@ -1,7 +1,7 @@
 # Copyright (C) 2021 alvin_junior
 
 
-# This file is part of AlvinMusicRobot (Telegram Bot)
+# This file is part of AlvinMusic (Telegram Bot)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -32,10 +32,10 @@ from pyrogram import Client as pbot
 
 @pbot.on_message(filters.command(["lyric", "lyrics"]))
 async def _(client, message):
-    lel = await message.reply("mencari lirik.....")
+    lel = await message.reply("Mencari lirik.....")
     query = message.text
     if not query:
-        await lel.edit("`apa yang seharusnya saya temukan `")
+        await lel.edit("`Apa yang seharusnya saya temukan `")
         return
 
     song = ""
@@ -46,7 +46,7 @@ async def _(client, message):
         else:
             reply = "Tidak dapat menemukan lirik untuk lagu itu! coba dengan nama artis beserta lagunya jika masih tidak berhasil coba `.glyrics`"
     else:
-        reply = "lirik tidak ditemukan! coba dengan nama artis beserta lagunya jika masih tidak berhasil coba `.glyrics`"
+        reply = "Lirik tidak ditemukan! coba dengan nama artis beserta lagunya jika masih tidak berhasil coba `.glyrics`"
 
     if len(reply) > 4095:
         with io.BytesIO(str.encode(reply)) as out_file:
