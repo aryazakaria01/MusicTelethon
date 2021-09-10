@@ -25,7 +25,7 @@
 
 ### 💜 Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fahrial2310/Music-TeleBot-IDN)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/aryazakaria01/MusicTelethon)
 
 Get pyrogram (p)  `SESSION` from here:
 
@@ -34,13 +34,13 @@ Get pyrogram (p)  `SESSION` from here:
 ### ⚔ Self-hosting (For Devs) 
 ```sh
 # Install Git First (apt-get install git)
-$ git clone https://github.com/fahrial2310/AlvinMusicRobot
-$ cd AlvinMusicRobot
+$ git clone https://github.com/aryazakaria01/MusicTelethon
+$ cd MusicTelethon
 # Upgrade sources
 # Install All Requirements 
 $ pip3 install -U -r requirements.txt
 # Fork This Repo and fill config.py vars with your own values.Then Start The Bot
-$ python3 -m AlvinMusicRobot
+$ python3 -m MusicTelethon
 ```
 
 ### Commands for Group 🛠
