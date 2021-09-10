@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project )
+# AlvinMusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -15,19 +15,19 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
-from AlvinMusicRobot.modules.msg import Messages as tr
+from AlvinMusic.modules.msg import Messages as tr
 from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup
 from pyrogram.types import InlineKeyboardButton
 from pyrogram.types import Message
-from AlvinMusicRobot.config import CREATOR_NAME
-from AlvinMusicRobot.config import ASSISTANT_NAME
-from AlvinMusicRobot.config import PROJECT_NAME
-from AlvinMusicRobot.config import SUPPORT_GROUP
-from AlvinMusicRobot.config import UPDATES_CHANNEL
-from AlvinMusicRobot.config import BOT_USERNAME
-from AlvinMusicRobot.config import SOURCE_CODE
+from AlvinMusic.config import CREATOR_NAME
+from AlvinMusic.config import ASSISTANT_NAME
+from AlvinMusic.config import PROJECT_NAME
+from AlvinMusic.config import SUPPORT_GROUP
+from AlvinMusic.config import UPDATES_CHANNEL
+from AlvinMusic.config import BOT_USERNAME
+from AlvinMusic.config import SOURCE_CODE
 logging.basicConfig(level=logging.INFO)
 
 @Client.on_message(filters.private & filters.incoming & filters.command(['start']))
@@ -47,7 +47,7 @@ def _start(client, message):
                         "📣 Support", url=f"https://t.me/{SUPPORT_GROUP}")
                 ],[
                     InlineKeyboardButton(
-                        "⚜️Creator🔰", url=f"https://t.me/{CREATOR_NAME}")
+                        "⚜️ Creator 🔰", url=f"https://t.me/{CREATOR_NAME}")
                 ]
             ]
         ),
@@ -106,13 +106,13 @@ def map(pos):
             [InlineKeyboardButton(text = '🔔 Updates', url=f"https://t.me/{UPDATES_CHANNEL}"),
              InlineKeyboardButton(text = '📣 Support', url=f"https://t.me/{SUPPORT_GROUP}")],
             [InlineKeyboardButton(text = '🔍 Source Code 🔎', url=f"https://{SURCE_CODE}")],
-            [InlineKeyboardButton(text = '◀️Back', callback_data = f"help+{pos-1}")]
+            [InlineKeyboardButton(text = '◀️ Back', callback_data = f"help+{pos-1}")]
         ]
     else:
         button = [
             [
-                InlineKeyboardButton(text = '◀️Back', callback_data = f"help+{pos-1}"),
-                InlineKeyboardButton(text = 'Next▶️', callback_data = f"help+{pos+1}")
+                InlineKeyboardButton(text = '◀️ Back', callback_data = f"help+{pos-1}"),
+                InlineKeyboardButton(text = 'Next ▶️', callback_data = f"help+{pos+1}")
             ],
         ]
     return button
@@ -125,7 +125,7 @@ async def ghelp(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "♾ klik disini untuk bantuan ♾", url=f"https://t.me/{BOT_USERNAME}?start"
+                        "♾ Klik disini untuk bantuan ♾", url=f"https://t.me/{BOT_USERNAME}?start"
                     )
                 ]
             ]
