@@ -20,8 +20,8 @@ from os import path
 
 from youtube_dl import YoutubeDL
 
-from AlvinMusicRobot.config import DURATION_LIMIT
-from AlvinMusicRobot.helpers.errors import DurationLimitError
+from AlvinMusic.config import DURATION_LIMIT
+from AlvinMusic.helpers.errors import DurationLimitError
 
 ydl_opts = {
     "format": "bestaudio/best",
