@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project )
+# AlvinMusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -24,8 +24,8 @@ from pyrogram.types import Chat
 from pyrogram.types import Message
 from pyrogram.errors import UserAlreadyParticipant
 
-from AlvinMusicRobot.services.callsmusic.callsmusic import client as USER
-from AlvinMusicRobot.config import SUDO_USERS
+from AlvinMusic.services.callsmusic.callsmusic import client as USER
+from AlvinMusic.config import SUDO_USERS
 
 @Client.on_message(filters.command(["broadcast"]))
 async def broadcast(_, message: Message):
@@ -34,16 +34,16 @@ async def broadcast(_, message: Message):
     if message.from_user.id not in SUDO_USERS:
         return
     else:
-        wtf = await message.reply("`memulai broadcast...`")
+        wtf = await message.reply("`Memulai broadcast...`")
         if not message.reply_to_message:
-            await wtf.edit("harap balas pesan untuk broadcast!")
+            await wtf.edit("Harap balas pesan untuk broadcast!")
             return
         lmao = message.reply_to_message.text
         async for dialog in USER.iter_dialogs():
             try:
                 await USER.send_message(dialog.chat.id, lmao)
                 sent = sent+1
-                await wtf.edit(f"`broadcasting...` \n\n**mengirim ke:** `{sent}` obrolan \n**gagal dalam:** {failed} Chats")
+                await wtf.edit(f"`Broadcasting...` \n\n**mengirim ke:** `{sent}` obrolan \n**gagal dalam:** {failed} Chats")
                 await asyncio.sleep(3)
             except:
                 failed=failed+1
