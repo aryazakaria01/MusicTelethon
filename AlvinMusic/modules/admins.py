@@ -20,15 +20,15 @@ from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import Message
 
-from AlvinMusicRobot.config import que
-from AlvinMusicRobot.function.admins import set
-from AlvinMusicRobot.helpers.channelmusic import get_chat_id
-from AlvinMusicRobot.helpers.decorators import authorized_users_only
-from AlvinMusicRobot.helpers.decorators import errors
-from AlvinMusicRobot.helpers.filters import command
-from AlvinMusicRobot.helpers.filters import other_filters
-from AlvinMusicRobot.services.callsmusic import callsmusic
-from AlvinMusicRobot.services.queues import queues
+from AlvinMusic.config import que
+from AlvinMusic.function.admins import set
+from AlvinMusic.helpers.channelmusic import get_chat_id
+from AlvinMusic.helpers.decorators import authorized_users_only
+from AlvinMusic.helpers.decorators import errors
+from AlvinMusic.helpers.filters import command
+from AlvinMusic.helpers.filters import other_filters
+from AlvinMusic.services.callsmusic import callsmusic
+from AlvinMusic.services.queues import queues
 
 
 @Client.on_message(filters.command("adminreset"))
@@ -52,7 +52,7 @@ async def pause(_, message: Message):
     if (chat_id not in callsmusic.active_chats) or (
         callsmusic.active_chats[chat_id] == "paused"
     ):
-        await message.reply_text("❗ tidak ada yang diputar!")
+        await message.reply_text("❗ Tidak ada yang diputar!")
     else:
         callsmusic.pause(chat_id)
         await message.reply_text("▶️ Paused!")
@@ -66,7 +66,7 @@ async def resume(_, message: Message):
     if (chat_id not in callsmusic.active_chats) or (
         callsmusic.active_chats[chat_id] == "playing"
     ):
-        await message.reply_text("❗ tidak ada yang dijeda!")
+        await message.reply_text("❗ Tidak ada yang dijeda!")
     else:
         callsmusic.resume(chat_id)
         await message.reply_text("⏸ Resumed!")
@@ -78,7 +78,7 @@ async def resume(_, message: Message):
 async def stop(_, message: Message):
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.active_chats:
-        await message.reply_text("❗ tidak ada streaming!")
+        await message.reply_text("❗ Tidak ada streaming!")
     else:
         try:
             queues.clear(chat_id)
@@ -86,7 +86,7 @@ async def stop(_, message: Message):
             pass
 
         await callsmusic.stop(chat_id)
-        await message.reply_text("❌ berhenti streaming!")
+        await message.reply_text("❌ Berhenti streaming!")
 
 
 @Client.on_message(command("skip") & other_filters)
@@ -96,7 +96,7 @@ async def skip(_, message: Message):
     global que
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.active_chats:
-        await message.reply_text("❗ tidak ada yang diputar untuk di skip!")
+        await message.reply_text("❗ Tidak ada yang diputar untuk di skip!")
     else:
         queues.task_done(chat_id)
         if queues.is_empty(chat_id):
@@ -112,7 +112,7 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f"- Skipped **{skip[0]}**\n- diputar sekarang **{qeue[0][0]}**")
+    await message.reply_text(f"- Skipped **{skip[0]}**\n- Diputar sekarang **{qeue[0][0]}**")
 
 
 @Client.on_message(filters.command("admincache"))
