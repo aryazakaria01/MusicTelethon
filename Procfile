@@ -1,1 +1,1 @@
-worker: python3 -m AlvinMusicRobot
+worker: python3 -m AlvinMusic
