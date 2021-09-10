@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project)
+# AlvinMusic (Telegram bot project)
 # Copyright (C) 2021  Inuka Asith & Rojserbest
 
 # This program is free software: you can redistribute it and/or modify
@@ -18,11 +18,11 @@
 import requests
 from pyrogram import Client as Bot
 
-from AlvinMusicRobot.config import API_HASH
-from AlvinMusicRobot.config import API_ID
-from AlvinMusicRobot.config import BG_IMAGE
-from AlvinMusicRobot.config import BOT_TOKEN
-from AlvinMusicRobot.services.callsmusic import run
+from AlvinMusic.config import API_HASH
+from AlvinMusic.config import API_ID
+from AlvinMusic.config import BG_IMAGE
+from AlvinMusic.config import BOT_TOKEN
+from AlvinMusic.services.callsmusic import run
 
 response = requests.get(BG_IMAGE)
 file = open("./etc/foreground.png", "wb")
@@ -34,7 +34,7 @@ bot = Bot(
     API_ID,
     API_HASH,
     bot_token=BOT_TOKEN,
-    plugins=dict(root="AlvinMusicRobot.modules"),
+    plugins=dict(root="AlvinMusic.modules"),
 )
 
 bot.start()
