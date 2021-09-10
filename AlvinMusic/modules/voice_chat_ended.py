@@ -2,8 +2,8 @@ from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import Message
 
-from AlvinMusicRobot.services.callsmusic.callsmusic import remove
-from AlvinMusicRobot.helpers.channelmusic import get_chat_id
+from AlvinMusic.services.callsmusic.callsmusic import remove
+from AlvinMusic.helpers.channelmusic import get_chat_id
 
 
 @Client.on_message(filters.voice_chat_ended)
