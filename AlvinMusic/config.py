@@ -1,4 +1,4 @@
-# AlvinMusicRobot- Telegram bot project
+# AlvinMusic- Telegram bot project
 # Copyright (C) 2021  Roj Serbest
 # Copyright (C) 2021  Inuka Asith
 # This program is free software: you can redistribute it and/or modify
