@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project )
+# AlvinMusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -35,8 +35,8 @@ from pyrogram.types import Message
 from youtube_search import YoutubeSearch
 from youtubesearchpython import SearchVideos
 
-from AlvinMusicRobot.config import DURATION_LIMIT
-from AlvinMusicRobot.modules.play import arq
+from AlvinMusic.config import DURATION_LIMIT
+from AlvinMusict.modules.play import arq
 
 
 @Client.on_message(filters.command("song") & ~filters.channel)
@@ -50,7 +50,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    m = message.reply("🔎 mencari lagu...")
+    m = message.reply("🔎 Mencari lagu...")
     ydl_opts = {"format": "bestaudio/best"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -67,10 +67,10 @@ def song(client, message):
         results[0]["views"]
 
     except Exception as e:
-        m.edit("❌ tidak menemukan apa-apa.\n\nCoba keywork lain atau mungkin mengejanya dengan benar.")
+        m.edit("❌ Tidak menemukan apa-apa.\n\nCoba keywork lain atau mungkin mengejanya dengan benar.")
         print(str(e))
         return
-    m.edit("mengunduh lagu..... ")
+    m.edit("Mengunduh lagu..... ")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=True)
@@ -278,7 +278,7 @@ async def jssong(_, message):
     is_downloading = True
     text = message.text.split(None, 1)[1]
     query = text.replace(" ", "%20")
-    m = await message.reply_text("mencari...")
+    m = await message.reply_text("Mencari...")
     try:
         songs = await arq.saavn(query)
         if not songs.ok:
@@ -349,7 +349,7 @@ async def ytmusic(client, message: Message):
 
             if duration > DURATION_LIMIT:
                 await pablo.edit(
-                    f"❌ Video lebih lama {DURATION_LIMIT} menit tidak diperbolehkan, video yang disediakan adalah {duration} menit"
+                    f"❌ Video lebih lama {DURATION_LIMIT} menit tidak diperbolehkan, video yang disediakan adalah {DURATION_LIMIT} menit"
                 )
                 is_downloading = False
                 return
