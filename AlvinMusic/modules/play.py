@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project)
+# AlvinMusic (Telegram bot project)
 # Copyright (C) 2021  Inukaasith
 # Copyright (C) 2021  TheHamkerCat (Python_ARQ)
 # This program is free software: you can redistribute it and/or modify
@@ -38,25 +38,25 @@ from pyrogram.types import Message
 from Python_ARQ import ARQ
 from youtube_search import YoutubeSearch
 
-from AlvinMusicRobot.config import ARQ_API_KEY
-from AlvinMusicRobot.config import BOT_NAME as bn
-from AlvinMusicRobot.config import DURATION_LIMIT
-from AlvinMusicRobot.config import UPDATES_CHANNEL as updateschannel
-from AlvinMusicRobot.config import que
-from AlvinMusicRobot.function.admins import admins as a
-from AlvinMusicRobot.helpers.admins import get_administrators
-from AlvinMusicRobot.helpers.channelmusic import get_chat_id
-from AlvinMusicRobot.helpers.errors import DurationLimitError
-from AlvinMusicRobot.helpers.decorators import errors
-from AlvinMusicRobot.helpers.decorators import authorized_users_only
-from AlvinMusicRobot.helpers.filters import command
-from AlvinMusicRobot.helpers.filters import other_filters
-from AlvinMusicRobot.helpers.gets import get_file_name
-from AlvinMusicRobot.services.callsmusic import callsmusic
-from AlvinMusicRobot.services.callsmusic import client as USER
-from AlvinMusicRobot.services.converter.converter import convert
-from AlvinMusicRobot.services.downloaders import youtube
-from AlvinMusicRobot.services.queues import queues
+from AlvinMusic.config import ARQ_API_KEY
+from AlvinMusic.config import BOT_NAME as bn
+from AlvinMusic.config import DURATION_LIMIT
+from AlvinMusic.config import UPDATES_CHANNEL as updateschannel
+from AlvinMusic.config import que
+from AlvinMusic.function.admins import admins as a
+from AlvinMusic.helpers.admins import get_administrators
+from AlvinMusic.helpers.channelmusic import get_chat_id
+from AlvinMusic.helpers.errors import DurationLimitError
+from AlvinMusic.helpers.decorators import errors
+from AlvinMusic.helpers.decorators import authorized_users_only
+from AlvinMusic.helpers.filters import command
+from AlvinMusic.helpers.filters import other_filters
+from AlvinMusic.helpers.gets import get_file_name
+from AlvinMusic.services.callsmusic import callsmusic
+from AlvinMusic.services.callsmusic import client as USER
+from AlvinMusic.services.converter.converter import convert
+from AlvinMusic.services.downloaders import youtube
+from AlvinMusic.services.queues import queues
 
 aiohttpsession = aiohttp.ClientSession()
 chat_id = None
@@ -69,7 +69,7 @@ def cb_admin_check(func: Callable) -> Callable:
         if cb.from_user.id in admemes:
             return await func(client, cb)
         else:
-            await cb.answer("anda tidak diizinkan!", show_alert=True)
+            await cb.answer("Anda tidak diizinkan!", show_alert=True)
             return
 
     return decorator
@@ -220,14 +220,14 @@ async def ee(client, message):
     if stats:
         await message.reply(stats)
     else:
-        await message.reply("tidak ada VC yang berjalan di obrolan")
+        await message.reply("Tidak ada VC yang berjalan di obrolan")
 
 
 @Client.on_message(filters.command("player") & filters.group & ~filters.edited)
 @authorized_users_only
 async def settings(client, message):
     if message.chat.id in DISABLED_GROUPS:
-        await message.reply("pemutar musik dinonaktif")
+        await message.reply("Pemutar musik dinonaktif")
         return    
     playing = None
     chat_id = get_chat_id(message.chat)
@@ -241,7 +241,7 @@ async def settings(client, message):
         else:
             await message.reply(stats, reply_markup=r_ply("play"))
     else:
-        await message.reply("tidak ada VC yang berjalan di obrolan")
+        await message.reply("Tidak ada VC yang berjalan di obrolan")
 
 
 @Client.on_message(
@@ -256,26 +256,26 @@ async def hfmm(_, message):
         return
     if len(message.command) != 2:
         await message.reply_text(
-            "saya hanya mengerti `/musicplayer on` and /musicplayer `off only`"
+            "Saya hanya mengerti `/musicplayer on` and /musicplayer `off only`"
         )
         return
     status = message.text.split(None, 1)[1]
     message.chat.id
     if status == "ON" or status == "on" or status == "On":
-        lel = await message.reply("`memuat...`")
+        lel = await message.reply("`Memuat...`")
         if not message.chat.id in DISABLED_GROUPS:
-            await lel.edit("pemutar musik berhasil diaktifkan untuk pengguna daam obrolan")
+            await lel.edit("Pemutar musik berhasil diaktifkan untuk pengguna daam obrolan")
             return
         DISABLED_GROUPS.remove(message.chat.id)
         await lel.edit(
-            f"pemutar musik berhasil dinonaktif untuk pengguna dalam obrolan {message.chat.id}"
+            f"Pemutar musik berhasil dinonaktif untuk pengguna dalam obrolan {message.chat.id}"
         )
 
     elif status == "OFF" or status == "off" or status == "Off":
-        lel = await message.reply("`memuat...`")
+        lel = await message.reply("`Memuat...`")
         
         if message.chat.id in DISABLED_GROUPS:
-            await lel.edit("pemutar musik berhasil dinonaktif untuk pengguna dalam obrolan")
+            await lel.edit("Pemutar musik berhasil dinonaktif untuk pengguna dalam obrolan")
             return
         DISABLED_GROUPS.append(message.chat.id)
         await lel.edit(
@@ -283,7 +283,7 @@ async def hfmm(_, message):
         )
     else:
         await message.reply_text(
-            "saya hanya mengerti `/musicplayer on` and /musicplayer `off only`"
+            "Saya hanya mengerti `/musicplayer on` and /musicplayer `off only`"
         )    
         
 
@@ -402,7 +402,7 @@ async def m_cb(b, cb):
             callsmusic.pause(chet_id)
             await cb.answer("Musik dijeda!")
     elif type_ == "cls":
-        await cb.answer("mengeluarkan menu")
+        await cb.answer("Mengeluarkan menu")
         await cb.message.delete()
 
     elif type_ == "menu":
@@ -432,7 +432,7 @@ async def m_cb(b, cb):
             queues.task_done(chet_id)
             if queues.is_empty(chet_id):
                 callsmusic.stop(chet_id)
-                await cb.message.edit("- tidak ada lagi daftar putar..\n- Leaving VC!")
+                await cb.message.edit("- Tidak ada lagi daftar putar..\n- Leaving VC!")
             else:
                 await callsmusic.set_stream(
                     chet_id, queues.get(chet_id)["file"]
@@ -480,7 +480,7 @@ async def play(_, message: Message):
             if administrator == message.from_user.id:
                 if message.chat.title.startswith("Channel Music: "):
                     await lel.edit(
-                        "<b>ingat untuk menambahkan helper di channel</b>",
+                        "<b>Ingat untuk menambahkan helper di channel</b>",
                     )
                     pass
                 try:
@@ -497,7 +497,7 @@ async def play(_, message: Message):
                         message.chat.id, "Saya bergabung dengan grup ini untuk memutar musik di VC"
                     )
                     await lel.edit(
-                        "<b>helper userbot  bergabung dengan obrolan Anda</b>",
+                        "<b>Helper userbot  bergabung dengan obrolan Anda</b>",
                     )
 
                 except UserAlreadyParticipant:
@@ -634,10 +634,10 @@ async def play(_, message: Message):
         try:
           results = YoutubeSearch(query, max_results=5).to_dict()
         except:
-          await lel.edit("berikan saya sesuatu untuk memutar")
+          await lel.edit("Berikan saya sesuatu untuk memutar")
         # Looks like hell. Aren't it?? FUCK OFF
         try:
-            toxxt = "**pilih lagu yang ingin anda putar**\n\n"
+            toxxt = "**Pilih lagu yang ingin anda putar**\n\n"
             j = 0
             useer=user_name
             emojilist = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣",]
@@ -727,7 +727,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"#⃣ lagu request anda <b>queued</b> di posisi {position}!",
+            caption=f"#⃣ Lagu request anda <b>queued</b> di posisi {position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -780,7 +780,7 @@ async def ytplay(_, message: Message):
             if administrator == message.from_user.id:
                 if message.chat.title.startswith("Channel Music: "):
                     await lel.edit(
-                        "<b>ingat untuk menambahkan helper kedalam channel</b>",
+                        "<b>Ingat untuk menambahkan helper kedalam channel</b>",
                     )
                     pass
                 try:
@@ -797,7 +797,7 @@ async def ytplay(_, message: Message):
                         message.chat.id, "Saya bergabung dengan grup ini untuk memutar musik di VC"
                     )
                     await lel.edit(
-                        "<b>helper userbot bergabung dengan obrolan Anda</b>",
+                        "<b>Helper userbot bergabung dengan obrolan Anda</b>",
                     )
 
                 except UserAlreadyParticipant:
@@ -842,7 +842,7 @@ async def ytplay(_, message: Message):
 
     except Exception as e:
         await lel.edit(
-            "lagu tidak ditemukan.Coba lagu lain atau mungkin mengejanya dengan benar."
+            "Lagu tidak ditemukan.Coba lagu lain atau mungkin mengejanya dengan benar."
         )
         print(str(e))
         return
@@ -885,7 +885,7 @@ async def ytplay(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"#⃣ lagu yang anda request <b>queued</b> di posisi {position}!",
+            caption=f"#⃣ Lagu yang anda request <b>queued</b> di posisi {position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -926,7 +926,7 @@ async def jiosaavn(client: Client, message_: Message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "AlvinMusicRobot"
+        user.first_name = "AlvinMusic"
     usar = user
     wew = usar.id
     try:
@@ -937,7 +937,7 @@ async def jiosaavn(client: Client, message_: Message):
             if administrator == message_.from_user.id:
                 if message_.chat.title.startswith("Channel Music: "):
                     await lel.edit(
-                        "<b>ingat untuk menambahkan helper ke channel anda</b>",
+                        "<b>Ingat untuk menambahkan helper ke channel anda</b>",
                     )
                     pass
                 try:
@@ -954,7 +954,7 @@ async def jiosaavn(client: Client, message_: Message):
                         message_.chat.id, "Saya bergabung dengan grup ini untuk memutar musik di VC"
                     )
                     await lel.edit(
-                        "<b>helper userbot bergabung ke obrolan anda</b>",
+                        "<b>Helper userbot bergabung ke obrolan anda</b>",
                     )
 
                 except UserAlreadyParticipant:
@@ -970,7 +970,7 @@ async def jiosaavn(client: Client, message_: Message):
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            "<i> helper Userbot tidak ada dalam obrolan ini, Minta admin untuk mengirim /play perintah untuk pertama kalinya atau menambahkan asisten secara manua</i>"
+            "<i> Helper Userbot tidak ada dalam obrolan ini, Minta admin untuk mengirim /play perintah untuk pertama kalinya atau menambahkan asisten secara manua</i>"
         )
         return
     requested_by = message_.from_user.first_name
@@ -978,7 +978,7 @@ async def jiosaavn(client: Client, message_: Message):
     text = message_.text.split(" ", 1)
     query = text[1]
     res = lel
-    await res.edit(f"mencari 🔍 untuk `{query}` di jio saavn")
+    await res.edit(f"Mencari 🔍 untuk `{query}` di jio saavn")
     try:
         songs = await arq.saavn(query)
         if not songs.ok:
@@ -1033,7 +1033,7 @@ async def jiosaavn(client: Client, message_: Message):
         )
 
     else:
-        await res.edit_text(f"{bn}=▶️ memutar.....")
+        await res.edit_text(f"{bn}=▶️ Memutar.....")
         que[chat_id] = []
         qeue = que.get(chat_id)
         s_name = sname
@@ -1046,14 +1046,14 @@ async def jiosaavn(client: Client, message_: Message):
         except:
             res.edit("Group call tidak terhubung karena saya tidak dapat bergabung")
             return
-    await res.edit("membuat Thumbnail.")
+    await res.edit("Membuat Thumbnail.")
     await generate_cover(requested_by, sname, ssingers, sduration, sthumb)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"memutar {sname} Via Jiosaavn",
+        caption=f"Memutar {sname} Via Jiosaavn",
     )
     os.remove("final.png")
 
@@ -1069,7 +1069,7 @@ async def lol_cb(b, cb):
     try:
         x,query,useer_id = typed_.split("|")      
     except:
-        await cb.message.edit("lagu tidak ditemukan")
+        await cb.message.edit("Lagu tidak ditemukan")
         return
     useer_id = int(useer_id)
     if cb.from_user.id != useer_id:
@@ -1139,7 +1139,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption=f"#⃣  request lagu oleh {r_by.mention} <b>queued</b> di posisi ke {position}!",
+            caption=f"#⃣  Request lagu oleh {r_by.mention} <b>queued</b> di posisi ke {position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")
