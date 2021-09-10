@@ -1,4 +1,4 @@
-# AlvinMusicRobot (Telegram bot project )
+# AlvinMusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -19,10 +19,10 @@ from pyrogram import Client
 from pyrogram import filters
 from pyrogram.errors import UserAlreadyParticipant
 import asyncio
-from AlvinMusicRobot.helpers.decorators import authorized_users_only
-from AlvinMusicRobot.helpers.decorators import errors
-from AlvinMusicRobot.services.callsmusic import client as USER
-from AlvinMusicRobot.config import SUDO_USERS
+from AlvinMusic.helpers.decorators import authorized_users_only
+from AlvinMusic.helpers.decorators import errors
+from AlvinMusic.services.callsmusic import client as USER
+from AlvinMusic.config import SUDO_USERS
 
 @Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
@@ -40,14 +40,14 @@ async def addchannel(client, message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "AlvinMusicRobot"
+        user.first_name = "AlvinMusic"
 
     try:
         await USER.join_chat(invitelink)
         await USER.send_message(message.chat.id, "Saya bergabung di sini seperti yang Anda minta")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>helper sudah bergabung di obrolan</b>",
+            "<b>Helper sudah bergabung di obrolan</b>",
         )
     except Exception as e:
         print(e)
@@ -57,7 +57,7 @@ async def addchannel(client, message):
         )
         return
     await message.reply_text(
-        "<b>helper userbot bergabung obrolan</b>",
+        "<b>Helper userbot bergabung obrolan</b>",
     )
 
 
@@ -88,7 +88,7 @@ async def bye(client, message):
                 failed=failed+1
                 await lol.edit(f"Assistant meninggalkan... keluar: {left} obrolan. gagal: {failed} obrolan.")
             await asyncio.sleep(0.7)
-        await client.send_message(message.chat.id, f"keluar {left} obrolan. gagal {failed} obrolan.")
+        await client.send_message(message.chat.id, f"Keluar {left} obrolan. gagal {failed} obrolan.")
     
     
 @Client.on_message(filters.command(["userbotjoinchannel","ubjoinc"]) & ~filters.private & ~filters.bot)
@@ -100,28 +100,28 @@ async def addcchannel(client, message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("apakah obrolan tertautkan")
+      await message.reply("Apakah obrolan tertautkan")
       return    
     chat_id = chid
     try:
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>tambahkan saya sebagai admin terlebih dahulu</b>",
+            "<b>Tambahkan saya sebagai admin terlebih dahulu</b>",
         )
         return
 
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "AlvinMusicRobot"
+        user.first_name = "AlvinMusic"
 
     try:
         await USER.join_chat(invitelink)
         await USER.send_message(message.chat.id, "Saya bergabung di sini seperti yang Anda minta")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>helper sudah bergabung obrolan</b>",
+            "<b>Helper sudah bergabung obrolan</b>",
         )
         return
     except Exception as e:
@@ -132,6 +132,6 @@ async def addcchannel(client, message):
         )
         return
     await message.reply_text(
-        "<b>helper userbot bergabung ke obrolan</b>",
+        "<b>Helper userbot bergabung ke obrolan</b>",
     )
     
