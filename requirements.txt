@@ -11,7 +11,7 @@ asyncio
 youtube_search
 search_engine_parser
 ffmpeg-python
-pillow==8.3.2
+pillow==9.0.0
 python-arq
 future
 psutil
